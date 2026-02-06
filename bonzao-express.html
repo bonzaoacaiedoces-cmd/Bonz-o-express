@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="pt-BR" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bonzão Express - Lanchonete, Sorveteria e Açaiteria</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(255, 193, 7, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(255, 193, 7, 0.8); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .pulse-glow {
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    
+    .shimmer-bg {
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+    
+    .hero-pattern {
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(255, 193, 7, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 193, 7, 0.1) 0%, transparent 30%);
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    
+    .btn-social {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .btn-social:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full overflow-auto">
+  <div id="app-wrapper" class="w-full min-h-full relative overflow-hidden"><!-- Background Image -->
+   <div class="absolute inset-0 z-0"><img src="https://i.ibb.co/YFQqSxcp/image.jpg" alt="Fundo Bonzão Express" loading="lazy" class="w-full h-full object-cover" onerror="this.style.background='#0891b2';"> <!-- Overlay semi-transparente -->
+    <div class="absolute inset-0 bg-black/30"></div>
+   </div><!-- Header decorativo -->
+   <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 z-10"></div>
+   <div class="w-full max-w-4xl mx-auto px-4 py-8 sm:py-12 relative z-10"><!-- Logo e Título -->
+    <header class="text-center mb-8 sm:mb-12">
+     <div class="float-animation inline-block mb-6">
+      <div class="w-28 h-28 sm:w-36 sm:h-36 mx-auto rounded-full flex items-center justify-center shadow-2xl border-4 border-white overflow-hidden bg-white"><img src="https://i.ibb.co/23RR3yS9/logo-bonzao.png" alt="Logo Bonzão Express" loading="lazy" class="w-full h-full object-cover" onerror="console.error('Image failed to load:', this.src); this.style.background='linear-gradient(to bottom right, #facc15, #fbbf24)'; this.alt='Logo Bonzão Express - Imagem indisponível';">
+      </div>
+     </div>
+     <h1 id="main-title" class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-lg" style="font-family: Arial, sans-serif;">Bonzão Express</h1>
+     <p class="text-yellow-300 text-lg sm:text-xl font-semibold mb-2" style="font-family: Arial, sans-serif;">Lanchonete, Sorveteria e Açaiteria</p>
+     <p id="subtitle" class="text-cyan-100 text-base sm:text-lg max-w-2xl mx-auto" style="font-family: Arial, sans-serif;">O seu cantinho favorito da orla de Costazul Rio das Ostras</p>
+    </header><!-- Card Principal -->
+    <main class="glass-card rounded-3xl shadow-2xl p-4 sm:p-6 mb-8 border border-cyan-200 max-w-2xl"><!-- Descrição -->
+     <div class="text-center mb-6">
+      <p id="description" class="text-gray-700 text-sm sm:text-base leading-relaxed" style="font-family: Arial, sans-serif;">Lanches deliciosos, pastel, Açaí e Sorvetes feitos com ingredientes selecionados, sabor intenso e aquele cuidado que dá pra sentir na primeira colherada.</p>
+     </div><!-- Botão CTA Principal -->
+     <div class="text-center mb-6"><button id="cta-button" class="btn-social bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-cyan-900 font-bold text-base sm:text-lg px-6 sm:px-10 py-3 sm:py-4 rounded-full shadow-xl pulse-glow" style="font-family: Arial, sans-serif;"> 🛒 Quero fazer meu pedido </button>
+     </div><!-- Divisor -->
+     <div class="flex items-center justify-center mb-6">
+      <div class="flex-1 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent"></div><span class="px-4 text-cyan-600 font-semibold text-sm" style="font-family: Arial, sans-serif;">Fale conosco</span>
+      <div class="flex-1 h-px bg-gradient-to-r from-transparent via-cyan-300 to-transparent"></div>
+     </div><!-- Botões de Contato -->
+     <div class="grid gap-3 sm:gap-4"><!-- WhatsApp --> <a id="whatsapp-link" href="https://wa.me/5521999999999" target="_blank" rel="noopener noreferrer" class="btn-social flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-lg">
+       <svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+       </svg><span style="font-family: Arial, sans-serif;">WhatsApp</span> </a> <!-- Instagram --> <a id="instagram-link" href="https://instagram.com/bonzaoexpress" target="_blank" rel="noopener noreferrer" class="btn-social flex items-center justify-center gap-3 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 hover:from-pink-600 hover:via-purple-600 hover:to-indigo-600 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-lg">
+       <svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+       </svg><span style="font-family: Arial, sans-serif;">Instagram</span> </a> <!-- iFood --> <a id="ifood-link" href="https://www.ifood.com.br" target="_blank" rel="noopener noreferrer" class="btn-social flex items-center justify-center gap-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold text-lg py-4 px-6 rounded-2xl shadow-lg">
+       <svg class="w-7 h-7" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+       </svg><span style="font-family: Arial, sans-serif;">Pe  a pelo iFood</span> </a>
+     </div>
+    </main><!-- Footer -->
+    <footer class="text-center text-cyan-100 text-sm pb-8" style="font-family: Arial, sans-serif;">
+     <p class="mb-2">📍 Orla de Costazul, Rio das Ostras - RJ</p>
+     <p>© 2024 Bonzão Express. Todos os direitos reservados.</p>
+    </footer>
+   </div><!-- Modal de Cadastro -->
+   <div id="modal-overlay" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 z-50 hidden">
+    <div class="glass-card rounded-3xl shadow-2xl p-6 sm:p-8 max-w-md w-full border-2 border-yellow-400 transform transition-all">
+     <div class="text-center mb-6">
+      <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"><span class="text-3xl">🛒</span>
+      </div>
+      <h2 class="text-2xl font-bold text-cyan-700" style="font-family: Arial, sans-serif;">Faça seu pedido!</h2>
+      <p class="text-gray-600 mt-2" style="font-family: Arial, sans-serif;">Preencha seus dados e entraremos em contato</p>
+     </div>
+     <form id="lead-form" class="space-y-4">
+      <div><label for="name-input" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: Arial, sans-serif;">Nome completo</label> <input type="text" id="name-input" required placeholder="Digite seu nome" class="w-full px-4 py-3 rounded-xl border-2 border-cyan-200 focus:border-cyan-500 focus:outline-none transition-colors text-gray-700" style="font-family: Arial, sans-serif;">
+      </div>
+      <div><label for="email-input" class="block text-sm font-semibold text-gray-700 mb-2" style="font-family: Arial, sans-serif;">E-mail</label> <input type="email" id="email-input" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl border-2 border-cyan-200 focus:border-cyan-500 focus:outline-none transition-colors text-gray-700" style="font-family: Arial, sans-serif;">
+      </div>
+      <div class="flex gap-3 pt-4"><button type="button" id="close-modal" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-6 rounded-xl transition-colors" style="font-family: Arial, sans-serif;"> Cancelar </button> <button type="submit" id="submit-btn" class="flex-1 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-cyan-900 font-bold py-3 px-6 rounded-xl shadow-lg transition-all" style="font-family: Arial, sans-serif;"> Enviar </button>
+      </div>
+     </form><!-- Mensagem de sucesso -->
+     <div id="success-message" class="hidden text-center py-8">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+       <svg class="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+       </svg>
+      </div>
+      <h3 class="text-xl font-bold text-green-600 mb-2" style="font-family: Arial, sans-serif;">Cadastro realizado!</h3>
+      <p class="text-gray-600" style="font-family: Arial, sans-serif;">Em breve entraremos em contato     </p><button id="close-success" class="mt-6 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-3 px-8 rounded-xl transition-colors" style="font-family: Arial, sans-serif;"> Fechar </button>
+     </div><!-- Mensagem de erro -->
+     <div id="error-message" class="hidden mt-4 p-3 bg-red-100 border border-red-300 rounded-xl text-red-700 text-center" style="font-family: Arial, sans-serif;">
+      Ops! Ocorreu um erro. Tente novamente.
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      main_title: 'Bonzão Express',
+      subtitle: 'O seu cantinho favorito da orla de Costazul rio das ostras',
+      description: 'Lanches deliciosos, pastel, Açaí e Sorvetes feitos com ingredientes selecionados, sabor intenso e aquele cuidado que dá pra sentir na primeira colherada.',
+      cta_button_text: 'Quero fazer meu pedido',
+      whatsapp_number: '5521999999999',
+      instagram_url: 'bonzaoexpress',
+      ifood_url: 'https://www.ifood.com.br',
+      background_color: '#0891b2',
+      surface_color: '#ffffff',
+      text_color: '#374151',
+      primary_action_color: '#facc15',
+      secondary_action_color: '#22c55e'
+    };
+
+    let config = { ...defaultConfig };
+    let currentRecords = [];
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        currentRecords = data;
+      }
+    };
+
+    // Element SDK Implementation
+    const element = {
+      defaultConfig,
+      
+      async onConfigChange(newConfig) {
+        config = { ...defaultConfig, ...newConfig };
+        
+        // Update text content
+        document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+        document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+        document.getElementById('description').textContent = config.description || defaultConfig.description;
+        
+        const ctaBtn = document.getElementById('cta-button');
+        ctaBtn.innerHTML = `🛒 ${config.cta_button_text || defaultConfig.cta_button_text}`;
+        
+        // Update links
+        const whatsappLink = document.getElementById('whatsapp-link');
+        whatsappLink.href = `https://wa.me/${config.whatsapp_number || defaultConfig.whatsapp_number}`;
+        
+        const instagramLink = document.getElementById('instagram-link');
+        const instaHandle = config.instagram_url || defaultConfig.instagram_url;
+        instagramLink.href = instaHandle.startsWith('http') ? instaHandle : `https://instagram.com/${instaHandle.replace('@', '')}`;
+        
+        const ifoodLink = document.getElementById('ifood-link');
+        ifoodLink.href = config.ifood_url || defaultConfig.ifood_url;
+        
+        // Update colors
+        const appWrapper = document.getElementById('app-wrapper');
+        appWrapper.style.background = `linear-gradient(to bottom right, ${config.background_color}, ${adjustColor(config.background_color, -20)}, ${adjustColor(config.background_color, -30)})`;
+        
+        document.getElementById('description').style.color = config.text_color || defaultConfig.text_color;
+        
+        ctaBtn.style.background = `linear-gradient(to right, ${config.primary_action_color}, ${adjustColor(config.primary_action_color, 10)})`;
+        
+        whatsappLink.style.background = `linear-gradient(to right, ${config.secondary_action_color}, ${adjustColor(config.secondary_action_color, -10)})`;
+      },
+      
+      mapToCapabilities(cfg) {
+        return {
+          recolorables: [
+            {
+              get: () => cfg.background_color || defaultConfig.background_color,
+              set: (value) => {
+                cfg.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            },
+            {
+              get: () => cfg.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                cfg.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            },
+            {
+              get: () => cfg.text_color || defaultConfig.text_color,
+              set: (value) => {
+                cfg.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => cfg.primary_action_color || defaultConfig.primary_action_color,
+              set: (value) => {
+                cfg.primary_action_color = value;
+                window.elementSdk.setConfig({ primary_action_color: value });
+              }
+            },
+            {
+              get: () => cfg.secondary_action_color || defaultConfig.secondary_action_color,
+              set: (value) => {
+                cfg.secondary_action_color = value;
+                window.elementSdk.setConfig({ secondary_action_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        };
+      },
+      
+      mapToEditPanelValues(cfg) {
+        return new Map([
+          ['main_title', cfg.main_title || defaultConfig.main_title],
+          ['subtitle', cfg.subtitle || defaultConfig.subtitle],
+          ['description', cfg.description || defaultConfig.description],
+          ['cta_button_text', cfg.cta_button_text || defaultConfig.cta_button_text],
+          ['whatsapp_number', cfg.whatsapp_number || defaultConfig.whatsapp_number],
+          ['instagram_url', cfg.instagram_url || defaultConfig.instagram_url],
+          ['ifood_url', cfg.ifood_url || defaultConfig.ifood_url]
+        ]);
+      }
+    };
+
+    // Helper function to adjust color brightness
+    function adjustColor(hex, amount) {
+      if (!hex) return '#0891b2';
+      const num = parseInt(hex.replace('#', ''), 16);
+      const r = Math.min(255, Math.max(0, (num >> 16) + amount));
+      const g = Math.min(255, Math.max(0, ((num >> 8) & 0x00FF) + amount));
+      const b = Math.min(255, Math.max(0, (num & 0x0000FF) + amount));
+      return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`;
+    }
+
+    // Modal functionality
+    const modal = document.getElementById('modal-overlay');
+    const ctaButton = document.getElementById('cta-button');
+    const closeModal = document.getElementById('close-modal');
+    const closeSuccess = document.getElementById('close-success');
+    const leadForm = document.getElementById('lead-form');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function openModal() {
+      modal.classList.remove('hidden');
+      leadForm.classList.remove('hidden');
+      successMessage.classList.add('hidden');
+      errorMessage.classList.add('hidden');
+      document.getElementById('name-input').value = '';
+      document.getElementById('email-input').value = '';
+    }
+
+    function closeModalFn() {
+      modal.classList.add('hidden');
+    }
+
+    ctaButton.addEventListener('click', openModal);
+    closeModal.addEventListener('click', closeModalFn);
+    closeSuccess.addEventListener('click', closeModalFn);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModalFn();
+      }
+    });
+
+    // Form submission
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('name-input').value.trim();
+      const email = document.getElementById('email-input').value.trim();
+      
+      if (!name || !email) return;
+      
+      // Check limit
+      if (currentRecords.length >= 999) {
+        errorMessage.textContent = 'Limite de cadastros atingido. Por favor, entre em contato via WhatsApp.';
+        errorMessage.classList.remove('hidden');
+        return;
+      }
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="inline-block animate-spin mr-2">⏳</span> Enviando...';
+      errorMessage.classList.add('hidden');
+      
+      try {
+        if (window.dataSdk) {
+          const result = await window.dataSdk.create({
+            name: name,
+            email: email,
+            created_at: new Date().toISOString()
+          });
+          
+          if (result.isOk) {
+            leadForm.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+          } else {
+            errorMessage.classList.remove('hidden');
+          }
+        } else {
+          // Fallback when SDK not available
+          leadForm.classList.add('hidden');
+          successMessage.classList.remove('hidden');
+        }
+      } catch (error) {
+        errorMessage.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Enviar';
+      }
+    });
+
+    // Initialize SDKs
+    async function init() {
+      if (window.elementSdk) {
+        window.elementSdk.init(element);
+      }
+      
+      if (window.dataSdk) {
+        await window.dataSdk.init(dataHandler);
+      }
+    }
+
+    init();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c96012e1277dd50',t:'MTc3MDMzMjIyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
